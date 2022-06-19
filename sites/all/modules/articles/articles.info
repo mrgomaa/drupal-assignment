@@ -1,0 +1,4 @@
+name = articles 
+description = Manage articles. 
+core = 7.x
+package = My Modules
