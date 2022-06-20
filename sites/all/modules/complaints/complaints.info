@@ -1,0 +1,4 @@
+name = complaints 
+description = Manage complaints. 
+core = 7.x
+package = My Modules

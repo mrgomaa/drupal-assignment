@@ -1,0 +1,5 @@
+name = Custom user Info
+description = Adds a custom block for user information.
+core = 7.x
+package = Sandbox
+dependencies[] = block

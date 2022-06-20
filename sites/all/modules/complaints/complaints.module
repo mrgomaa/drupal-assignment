@@ -1,0 +1,52 @@
+<?php
+require_once ('complaints.theme.inc'); 
+function complaints_menu() {
+    $items = array();
+     $items['complaints'] = array(
+        'title'             =>  'Complaints View',  //page title
+        'description'       =>  'Complaints Information',  //description show when mouse hover on link
+        'page callback'     =>  'complaints_list',  //callback function which is invoked when menu item is called.
+        'access callback'   =>  false,  //any user can access this page
+       );
+     return $items;
+}
+
+function complaints_list() {    
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+          ->entityCondition('bundle', 'complaints')
+          //->propertyCondition('status', 1)
+          ;
+    $result = $query->execute();
+
+    if (!empty($result['node'])) {
+        $nids = array_keys($result['node']);
+        // var_dump($nids);
+        $nodes = node_load_multiple($nids,null,true);
+        $weights = array();
+
+        // var_dump($nodes);
+
+        foreach ($nodes as $node) {
+            // $fields = field_view_field('node', $node, 'title'); 
+            $mail = field_view_field('node', $node, 'field_mail'); 
+            $phone = field_view_field('node', $node, 'field_phone'); 
+            $complaint_type = field_view_field('node', $node, 'field_complaint_type'); 
+            $workflow = field_view_field('node', $node, 'field_workflow'); 
+            
+            // var_dump($fields);
+            // echo $fields[0]['#markup'];
+            $rows[] = array(
+                            'mail' => $mail[0]['#markup'],            
+                            'phone' => $phone[0]['#markup'],
+                            'complaint_type' => $complaint_type[0]['#markup'],
+                            'workflow' => $workflow[0]['#markup'],
+                            
+                            );
+        }
+        
+    }
+    
+    $output = theme('complaints_list', array('data'=> $rows)); 
+    return $output;
+}

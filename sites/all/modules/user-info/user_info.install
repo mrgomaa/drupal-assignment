@@ -1,0 +1,63 @@
+<?php
+/**
+ * Implements hook_install().
+ */
+function user_info_install() {
+  
+  // Create all the fields we are adding to our content type.
+  foreach (_user_info_installed_fields() as $field) {
+    field_create_field($field);
+  }
+  
+  // Create all the instances for our fields.
+  foreach (_user_info_installed_instances() as $instance) {
+    $instance['entity_type'] = 'node';
+    $instance['bundle'] = 'user_info';
+    field_create_instance($instance);
+  }
+
+
+  /**
+  * Return a structured array defining the fields created by this content type.
+  */
+  function _user_info_installed_fields() {
+    $t = get_t();
+    return array(
+      'user_info_notes' => array(
+      'field_name' => 'user_info_notes',
+      'label' => $t('Notes of the user_info'),
+      'type' => 'text',
+      ),
+    );
+  }
+
+
+
+  /**
+* Return a structured array defining the instances for this content type.
+*/
+  function _user_info_installed_instances() {
+    $t = get_t();
+
+    return array(
+      
+      'user_info_notes' => array(
+        'field_name' => 'user_info_notes',
+        'type' => 'text',
+        'label' => $t('notes of the user_info'),
+        'widget' => array('type' => 'text_textfield')
+      ),
+
+      'display' => array(
+        'user_info_list' => array(
+          'label' => $t('notes of the listing'),
+          'type' => 'text'
+        )
+      ),
+
+    );
+    
+  }
+
+
+}

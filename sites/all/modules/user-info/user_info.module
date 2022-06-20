@@ -1,0 +1,68 @@
+<?php
+/**
+ * Implements hook_block_info().
+ */
+function user_info_block_info() {
+    $blocks = array();
+    $blocks['my_block'] = array(
+      'info' => t('My Custom Block'),
+    );
+    
+    return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function user_info_block_view($delta = '') {
+    global $user;
+    $block = array();
+  
+    $block['subject'] = t('user information custom block');
+
+    $user_fields = user_load($user->uid);
+
+    $firstName = $user_fields->field_first_name['und']['0']['value'];
+    $job = $user_fields->field_job['und']['0']['value'];
+
+    switch($delta) {
+      case 'my_block' :
+        $block['content'] = $firstName . '&nbsp;&nbsp;' . $user->name . '&nbsp;&nbsp;' . $GLOBALS['user']->mail . '&nbsp;&nbsp;' . $job;
+        break;
+    }
+    
+    return $block;
+}
+
+/**
+ * Implements hook_field_info().
+ */
+// function user_info_field_info() {
+//     return array(
+//         'user_info_second_name' => array(
+//         'label' => t('second name'),
+//         'description' => t('second name field.'),
+//         'default_widget' => 'user_info_3text',
+//         'default_formatter' => 'user_info_simple_text',
+//         ),
+//     );
+// }
+
+
+// /**
+//  * Implements hook_field_schema().
+//  */
+// function user_info_field_schema($field) {
+//     $columns = array(
+//                 'second_name' => array('type' => 'varchar', 'length' => 50, 'not null' => FALSE),
+//                 );
+//     $indexes = array(
+//                 'second_name' => array('second_name'),
+//                 );
+    
+//     return array(
+//             'columns' => $columns,
+//             'indexes' => $indexes,
+//             );
+// }

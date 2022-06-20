@@ -1,0 +1,63 @@
+<?php
+/**
+ * Implements hook_install().
+ */
+// function complaints_install() {
+  
+//   // Create all the fields we are adding to our content type.
+//   foreach (_complaints_installed_fields() as $field) {
+//     field_create_field($field);
+//   }
+  
+//   // Create all the instances for our fields.
+//   foreach (_complaints_installed_instances() as $instance) {
+//     $instance['entity_type'] = 'node';
+//     $instance['bundle'] = 'complaints';
+//     field_create_instance($instance);
+//   }
+
+
+//   /**
+//   * Return a structured array defining the fields created by this content type.
+//   */
+//   function _complaints_installed_fields() {
+//     $t = get_t();
+//     return array(
+//       'complaints_notes' => array(
+//       'field_name' => 'complaints_notes',
+//       'label' => $t('Notes of the complaints'),
+//       'type' => 'text',
+//       ),
+//     );
+//   }
+
+
+
+//   /**
+// * Return a structured array defining the instances for this content type.
+// */
+//   function _complaints_installed_instances() {
+//     $t = get_t();
+
+//     return array(
+      
+//       'complaints_notes' => array(
+//         'field_name' => 'complaints_notes',
+//         'type' => 'text',
+//         'label' => $t('notes of the complaints'),
+//         'widget' => array('type' => 'text_textfield')
+//       ),
+
+//       'display' => array(
+//         'complaints_list' => array(
+//           'label' => $t('notes of the listing'),
+//           'type' => 'text'
+//         )
+//       ),
+
+//     );
+    
+//   }
+
+
+// }
