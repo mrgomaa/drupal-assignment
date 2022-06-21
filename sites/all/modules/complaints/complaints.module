@@ -100,3 +100,14 @@ function complaints_field_access($op, $field, $entity_type, $entity, $account){
   }
   
 }
+
+function complaints_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  $user = user_load($user->uid);
+  if(in_array('Manager', $user->roles)){
+      if (arg(2) == 'edit') { #Use the URL parts
+             $form['title']['#access'] = FALSE;
+      }
+  }
+}
+
